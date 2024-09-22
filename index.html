@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="mode_selection"></div>
+    <div id="color_selection"></div>
+
+    <div id="input_phase">
+        <input type="number" placeholder="x" id="x" value="26">
+        <input type="number" placeholder="y" id="y" value="15">
+        <button onclick="regenerate()">再生成</button>
+    </div>
+
+    <div id="input_coloring">
+        <input type="number" id="cx" placeholder="x">
+        <input type="number" id="cy" placeholder="y">
+        <input type="text" id="color_code" placeholder="cc">
+        <button onclick="coloring_()">決定</button>
+    </div>
+
+    <div id="universal"></div>
+
+    <div>
+        <textarea id="input_array" wrap="off" rows="6" cols="30"></textarea>
+        <button onclick="input()">入力</button>
+        <button onclick="output()">出力</button>
+    </div>
+
+    <div>
+        <p id="op"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

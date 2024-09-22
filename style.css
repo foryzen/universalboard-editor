@@ -1,0 +1,39 @@
+#mode_selection{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+#color_selection{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.mode{
+    cursor: pointer;
+    border: 1px solid black;
+    margin: 0 2px;
+}
+
+.color{
+    cursor: pointer;
+    border: 1px solid black;
+    margin: 0 2px;
+}
+
+#universal{
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    display: inline-block;
+}
+
+#input_phase{
+    margin-bottom: 10px;
+}
+
+#input_coloring{
+    margin-bottom: 10px;
+}
+
+#op{
+    font-size: 11px;
+    font-family: 'UD デジタル 教科書体 N-R';
+}
