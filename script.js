@@ -66,7 +66,7 @@ function generate(ix,iy){
             td.style.border = '1px solid rgba(0, 0, 0, 0.5)'
             td.style.display = 'inline-block'
             td.id = `x${x}y${y}`
-            td.setAttribute('onclick',`select(${x},${y})`)
+            td.setAttribute('onclick',`select(0,${x},${y})`)
             tr.appendChild(td)
 
             array.push(0)
@@ -117,7 +117,7 @@ function coloring(x){
     current_mode = null
 }
 
-function select(x,y){
+function select(a,x,y){
     console.log(`P(${x},${y})`)
 
     if(coloring_mode==0){
@@ -129,6 +129,8 @@ function select(x,y){
         data[y][x] = data[y][x]-Math.floor(data[y][x]/100)*100+current_color_mode*100
         color = current_color_mode
     }
+
+    //reverse()
 }
 
 function init(){
