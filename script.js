@@ -1,84 +1,91 @@
 const dev_mode = 1;
 
 const modes = [
-    'empty.png',
-    'cross.png',
-    'circle.png',
-
-    'line_top_bottom.png',
-    'line_right_left.png',
-
-    'line_top_right.png',
-    'line_right_bottom.png',
-    'line_bottom_left.png',
-    'line_top_left.png',
-
-    'line_top_right_left.png',
-    'line_top_right_bottom.png',
-    'line_right_bottom_left.png',
-    'line_top_bottom_left.png',
-    'line_top_right_bottom_left.png',
-
-    'circle_top.png',
-    'circle_right.png',
-    'circle_bottom.png',
-    'circle_left.png',
-
-    'circle_top_right.png',
-    'circle_right_bottom.png',
-    'circle_bottom_left.png',
-    'circle_top_left.png',
-
-    'circle_top_bottom.png',
-    'circle_right_left.png',
-
-    'circle_top_right_left.png',
-    'circle_top_right_bottom.png',
-    'circle_right_bottom_left.png',
-    'circle_top_bottom_left.png',
-    'circle_top_right_bottom_left.png'
+    ['empty.png', 'empty.png', 'empty.png'],
+    ['cross.png', 'cross.png', 'cross.png'],
+    ['circle.png', 'circle.png', 'circle.png'],
+    ['line_top_bottom.png', 'line_top_bottom.png', 'line_top_bottom.png'],
+    ['line_right_left.png', 'line_right_left.png', 'line_right_left.png'],
+    ['line_top_right.png', 'line_right_bottom.png', 'line_top_left.png'],
+    ['line_right_bottom.png', 'line_top_right.png', 'line_bottom_left.png'],
+    ['line_bottom_left.png', 'line_top_left.png', 'line_right_bottom.png'],
+    ['line_top_left.png', 'line_bottom_left.png', 'line_top_right.png'],
+    ['line_top_right_left.png', 'line_right_bottom_left.png', 'line_top_right_left.png'],
+    ['line_top_right_bottom.png', 'line_top_right_bottom.png', 'line_top_bottom_left.png'],
+    ['line_right_bottom_left.png', 'line_top_right_left.png', 'line_right_bottom_left.png'],
+    ['line_top_bottom_left.png', 'line_top_bottom_left.png', 'line_top_right_bottom.png'],
+    ['line_top_right_bottom_left.png', 'line_top_right_bottom_left.png', 'line_top_right_bottom_left.png'],
+    ['circle_top.png', 'circle_bottom.png', 'circle_top.png'],
+    ['circle_right.png', 'circle_right.png', 'circle_left.png'],
+    ['circle_bottom.png', 'circle_top.png', 'circle_bottom.png'],
+    ['circle_left.png', 'circle_left.png', 'circle_right.png'],
+    ['circle_top_right.png', 'circle_right_bottom.png', 'circle_top_left.png'],
+    ['circle_right_bottom.png', 'circle_top_right.png', 'circle_bottom_left.png'],
+    ['circle_bottom_left.png', 'circle_top_left.png', 'circle_right_bottom.png'],
+    ['circle_top_left.png', 'circle_bottom_left.png', 'circle_top_right.png'],
+    ['circle_top_bottom.png', 'circle_top_bottom.png', 'circle_top_bottom.png'],
+    ['circle_right_left.png', 'circle_right_left.png', 'circle_right_left.png'],
+    ['circle_top_right_left.png', 'circle_right_bottom_left.png', 'circle_top_right_left.png'],
+    ['circle_top_right_bottom.png', 'circle_top_right_bottom.png', 'circle_top_bottom_left.png'],
+    ['circle_right_bottom_left.png', 'circle_top_right_left.png', 'circle_right_bottom_left.png'],
+    ['circle_top_bottom_left.png', 'circle_top_bottom_left.png', 'circle_top_right_bottom.png'],
+    ['circle_top_right_bottom_left.png', 'circle_top_right_bottom_left.png', 'circle_top_right_bottom_left.png']
 ]
 
 const colors = [
     'white','black','brown','red','orange','yellow','green','blue','purple','gray'
 ]
 
-let current_mode, coloring_mode, current_color_mode, array
+let current_mode, coloring_mode, current_color_mode, array, global_x, global_y
 
 function sc(x){
     return document.getElementById(x)
 }
 
 function generate(ix,iy){
+    global_x = ix
+    global_y = iy
+
     data = []
     array = []
 
-    for(y=0;y<iy;y++){
-        tr = document.createElement('div')
-        tr.style.display = 'flex'
+    for(a=0;a<3;a++){
+        for(y=0;y<iy;y++){
+            tr = document.createElement('div')
+            tr.style.display = 'flex'
 
-        array = []
-    
-        for(x=0;x<ix;x++){
-            td = document.createElement('div')
-            td.style.height = '20px'
-            td.style.width = '20px'
-            td.style.border = '1px solid rgba(0, 0, 0, 0.5)'
-            td.style.display = 'inline-block'
-            td.id = `x${x}y${y}`
-            td.setAttribute('onclick',`select(0,${x},${y})`)
-            tr.appendChild(td)
+            array = []
+        
+            for(x=0;x<ix;x++){
+                td = document.createElement('div')
+                td.style.height = '20px'
+                td.style.width = '20px'
+                td.style.border = '1px solid rgba(0, 0, 0, 0.5)'
+                td.style.display = 'inline-block'
+                td.id = `a${a}x${x}y${y}`
+                td.setAttribute('onclick',`select(${a},${x},${y})`)
+                tr.appendChild(td)
 
-            array.push(0)
+                if(a==0)array.push(0)
+            }
+
+            if(a==0){
+                data.push(array)
+                sc('universal').appendChild(tr)
+            }else if(a==1){
+                sc('universal_tb').appendChild(tr)
+            }else if(a==2){
+                sc('universal_lr').appendChild(tr)
+            }
+
         }
-
-        sc('universal').appendChild(tr)
-        data.push(array)
     }
 }
 
 function regenerate(){
     sc('universal').innerHTML = ''
+    sc('universal_tb').innerHTML = ''
+    sc('universal_lr').innerHTML = ''
     ix = Number(sc('x').value)
     iy = Number(sc('y').value)
     
@@ -118,19 +125,47 @@ function coloring(x){
 }
 
 function select(a,x,y){
-    console.log(`P(${x},${y})`)
-
+    console.log(`P(${a},${x},${y})`)
+    
     if(coloring_mode==0){
-        sc(`x${x}y${y}`).innerHTML = `<img src="icon/${modes[current_mode]}"></img>`
-        data[y][x] = Math.floor(data[y][x]/100)*100+current_mode
+        if(a==0){
+            sc(`a0x${x}y${y}`).innerHTML = `<img src="icon/${modes[current_mode][0]}"></img>`
+            sc(`a1x${x}y${global_y-y-1}`).innerHTML = `<img src="icon/${modes[current_mode][1]}"></img>`
+            sc(`a2x${global_x-x-1}y${y}`).innerHTML = `<img src="icon/${modes[current_mode][2]}"></img>`
+            data[y][x] = Math.floor(data[y][x]/100)*100+current_mode
+        }else if(a==1){
+            sc(`a0x${x}y${global_y-y-1}`).innerHTML = `<img src="icon/${modes[current_mode][0]}"></img>`
+            sc(`a1x${x}y${y}`).innerHTML = `<img src="icon/${modes[current_mode][1]}"></img>`
+            sc(`a2x${global_x-x-1}y${global_y-y-1}`).innerHTML = `<img src="icon/${modes[current_mode][2]}"></img>`
+            data[global_y-y-1][x] = Math.floor(data[global_y-y-1][x]/100)*100+current_mode
+        }else if(a==2){
+            sc(`a0x${global_x-x-1}y${y}`).innerHTML = `<img src="icon/${modes[current_mode][0]}"></img>`
+            sc(`a1x${global_x-x-1}y${global_y-y-1}`).innerHTML = `<img src="icon/${modes[current_mode][1]}"></img>`
+            sc(`a2x${x}y${y}`).innerHTML = `<img src="icon/${modes[current_mode][2]}"></img>`
+            data[y][global_x-x-1] = Math.floor(data[y][global_x-x-1]/100)*100+current_mode
+        }
+
         universal = current_mode
     }else{
-        sc(`x${x}y${y}`).style.background = colors[current_color_mode]
-        data[y][x] = data[y][x]-Math.floor(data[y][x]/100)*100+current_color_mode*100
+        if(a==0){
+            sc(`a0x${x}y${y}`).style.background = colors[current_color_mode]
+            sc(`a1x${x}y${global_y-y-1}`).style.background = colors[current_color_mode]
+            sc(`a2x${global_x-x-1}y${y}`).style.background = colors[current_color_mode]
+            data[y][x] = data[y][x]-Math.floor(data[y][x]/100)*100+current_color_mode*100
+        }else if(a==1){
+            sc(`a0x${x}y${global_y-y-1}`).style.background = colors[current_color_mode]
+            sc(`a1x${x}y${y}`).style.background = colors[current_color_mode]
+            sc(`a2x${global_x-x-1}y${global_y-y-1}`).style.background = colors[current_color_mode]
+            data[global_y-y-1][x] = data[global_y-y-1][x]-Math.floor(data[global_y-y-1][x]/100)*100+current_color_mode*100
+        }else if(a==2){
+            sc(`a0x${global_x-x-1}y${y}`).style.background = colors[current_color_mode]
+            sc(`a1x${global_x-x-1}y${global_y-y-1}`).style.background = colors[current_color_mode]
+            sc(`a2x${x}y${y}`).style.background = colors[current_color_mode]
+            data[y][global_x-x-1] = data[y][global_x-x-1]-Math.floor(data[y][global_x-x-1]/100)*100+current_color_mode*100
+        }
+
         color = current_color_mode
     }
-
-    //reverse()
 }
 
 function init(){
@@ -141,7 +176,7 @@ function init(){
         el.setAttribute('class','mode')
         el.setAttribute('onclick',`mode(${i})`)
         el.id = `mode${i}`
-        el.innerHTML = `<img src="icon/${modes[i]}">`
+        el.innerHTML = `<img src="icon/${modes[i][0]}">`
 
         sc('mode_selection').appendChild(el)
     }
@@ -194,6 +229,9 @@ function input(){
     console.log(x,y)
     
     sc('universal').innerHTML = ''
+    sc('universal_tb').innerHTML = ''
+    sc('universal_lr').innerHTML = ''
+
     generate(x,y)
 
     for(iy=0;iy<y;iy++){
@@ -203,8 +241,14 @@ function input(){
             universal = data[iy][ix]-Math.floor(data[iy][ix]/100)*100
             color = Math.floor(data[iy][ix]/100)
 
-            sc(`x${ix}y${iy}`).innerHTML = `<img src="icon/${modes[universal]}"></img>`
-            sc(`x${ix}y${iy}`).style.background = colors[color]
+            sc(`a0x${ix}y${iy}`).innerHTML = `<img src="icon/${modes[universal][0]}"></img>`
+            sc(`a0x${ix}y${iy}`).style.background = colors[color]
+
+            sc(`a1x${ix}y${global_y-iy-1}`).innerHTML = `<img src="icon/${modes[universal][1]}"></img>`
+            sc(`a1x${ix}y${global_y-iy-1}`).style.background = colors[color]
+
+            sc(`a2x${global_x-ix-1}y${iy}`).innerHTML = `<img src="icon/${modes[universal][2]}"></img>`
+            sc(`a2x${global_x-ix-1}y${iy}`).style.background = colors[color]
         }
     }
 }
@@ -239,14 +283,6 @@ function output(){
     text += ']'
 
     sc('op').innerHTML = text
-}
-
-function coloring_(){
-    x = sc('cx').value
-    y = sc('cy').value
-    c = sc('color_code').value
-
-    sc(`x${x}y${y}`).style.background = `${c}`
 }
 
 init()
