@@ -216,6 +216,10 @@ function init(){
     //     }
     // })
 
+    window.addEventListener('keydown', function(event){
+        console.log(event.key)
+    })
+
     generate(10,10)
     mode(0)
 }
