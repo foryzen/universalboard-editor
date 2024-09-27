@@ -224,6 +224,12 @@ function init(){
                 }else{
                     mode(current_mode+1)
                 }
+            }else{
+                if(current_color_mode==colors.length-1){
+                    coloring(0)
+                }else{
+                    coloring(current_color_mode+1)
+                }
             }
         }else if(event.key=='a'){
             if(coloring_mode==0){
@@ -231,6 +237,12 @@ function init(){
                     mode(modes.length-1)
                 }else{
                     mode(current_mode-1)
+                }
+            }else{
+                if(current_color_mode==0){
+                    coloring(colors.length-1)
+                }else{
+                    coloring(current_color_mode-1)
                 }
             }
         }
