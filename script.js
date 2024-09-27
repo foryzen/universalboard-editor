@@ -218,16 +218,20 @@ function init(){
 
     window.addEventListener('keydown', function(event){
         if(event.key=='d'){
-            if(current_mode==modes.length-1){
-                mode(0)
-            }else{
-                mode(current_mode+1)
+            if(coloring_mode==0){
+                if(current_mode==modes.length-1){
+                    mode(0)
+                }else{
+                    mode(current_mode+1)
+                }
             }
         }else if(event.key=='a'){
-            if(current_mode==0){
-                mode(modes.length-1)
-            }else{
-                mode(current_mode-1)
+            if(coloring_mode==0){
+                if(current_mode==0){
+                    mode(modes.length-1)
+                }else{
+                    mode(current_mode-1)
+                }
             }
         }
     })
